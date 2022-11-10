@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RpgCore;
+using System.Text;
 
 //ConfigureServices
 var builder = WebApplication.CreateBuilder(args);
@@ -16,18 +18,46 @@ builder.Services.AddSwaggerGen(x =>
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey
     });
+    //x.AddSecurityRequirement(
+    //    new OpenApiSecurityRequirement
+    //    {
+    //        {
+    //            new OpenApiSecurityScheme
+    //            {
+    //                Reference = new OpenApiReference
+    //                {
+    //                    Id = "Bearer",
+    //                    Type = ReferenceType.SecurityScheme
+    //                }
+    //            }, new List<string>()
+    //        }
+    //    }
+    //    );
 });
 
+var configuration = builder.Configuration;
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer();
+    .AddJwtBearer(options =>
+    {
+        //options.TokenValidationParameters = new TokenValidationParameters
+        //{
+        //    ValidateIssuer = true,
+        //    ValidateAudience = true,
+        //    ValidateLifetime = true,
+        //    ValidateIssuerSigningKey = true,
+        //    ValidIssuer = configuration["Jwf:Issuer"],
+        //    ValidAudience = configuration["Jwf:Audience"],
+        //    IssuerSigningKey =
+        //        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwf:Key"])
+        //};
+    });
 builder.Services.AddAuthorization();
 
-var apiUrls = builder.Configuration.GetSection("apiUrls").Get<ApiUrls>();
+var apiUrls = configuration.GetSection("apiUrls").Get<ApiUrls>();
 
 
 var baseEnemyUrl = new Uri(apiUrls.Enemy);
 var getEnemyUrl = new Uri(baseEnemyUrl, "/name");
-Console.WriteLine(getEnemyUrl);
 
 var app = builder.Build();
 //Configure
