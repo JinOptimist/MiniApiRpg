@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnemyApi", "EnemyApi\EnemyA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TavernApi", "TavernApi\TavernApi.csproj", "{2C827B73-A6DE-4160-B8CC-065D1E79F062}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgCore", "RpgCore\RpgCore.csproj", "{146A80AE-F9EA-4CF3-B03E-FD78D6387B1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgCore", "RpgCore\RpgCore.csproj", "{146A80AE-F9EA-4CF3-B03E-FD78D6387B1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,6 @@
 ﻿namespace RpgCore
 {
-    public class ApiUrls
+    public record ApiUrls
     {
         public string Enemy { get; set; }
         public string Tavern { get; set; }
